@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Technician Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Technician Page</h1>
+</div>
+
+<h2>Technician Dashboard</h2>
+
+<p>Welcome Technician</p>
+
+<hr />
+
+<h3>Issue Management</h3>
+
+<br />
+
+<a asp-controller="Technician"
+   asp-action="ViewReportedIssues">
+
+    <button>
+        View Reported Issues
+    </button>
+
+</a>
+
+<br />
+<br />
+
+<a asp-controller="Technician"
+   asp-action="UpdateIssueStatus">
+
+    <button>
+        Update Issue Status
+    </button>
+
+</a>
+
+<br />
+<br />
+
+<a asp-controller="Technician"
+   asp-action="ManageProfile">
+
+    <button>
+        Manage Profile
+    </button>
+
+</a>

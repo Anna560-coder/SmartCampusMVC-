@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Lecture Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome To Lecture Page</h1>
+</div>
+
+<h2>Lecturer Dashboard</h2>
+
+<p>Welcome Lecturer</p>
+
+<hr />
+
+<h3>Consultation Management</h3>
+
+<br />
+
+<a asp-controller="Lecture"
+   asp-action="ViewConsultations">
+
+    <button>
+        View Student Consultations
+    </button>
+
+</a>
+
+<br />
+<br />
+
+<a asp-controller="Lecture"
+   asp-action="ApproveRequests">
+
+    <button>
+        Approve Consultation Requests
+    </button>
+
+</a>
+
+<br />
+<br />
+
+<a asp-controller="Lecture"
+   asp-action="ManageProfile">
+
+    <button>
+        Manage Profile
+    </button>
+
+</a>
