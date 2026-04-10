@@ -1,7 +1,66 @@
-﻿<h2>Request Campus Service</h2>
-<p>This module is under development.</p>
+﻿@{
+    ViewData["Title"] = "Consultation History";
+}
 
-<!-- BACK TO DASHBOARD BUTTON -->
+<h2>My Booked Consultations</h2>
+
+<p>Below is a list of all your booked academic consultations.</p>
+
+<hr />
+
+<table border="1">
+
+    <thead>
+        <tr>
+            <th>Lecturer</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Reason</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        <!-- PENDING -->
+        <tr>
+            <td>Dr. Paulina Phoobane</td>
+            <td>2026-04-15</td>
+            <td>10:00</td>
+            <td>Help with assignment 2</td>
+            <td style="color:orange; font-weight:bold;">
+                Pending
+            </td>
+        </tr>
+
+        <!-- APPROVED -->
+        <tr>
+            <td>Prof. Khumulani Sibande</td>
+            <td>2026-04-18</td>
+            <td>14:30</td>
+            <td>Exam preparation guidance</td>
+            <td style="color:green; font-weight:bold;">
+                Approved
+            </td>
+        </tr>
+
+        <!-- REJECTED -->
+        <tr>
+            <td>Dr. Ntima Mabanza</td>
+            <td>2026-04-20</td>
+            <td>09:00</td>
+            <td>Project consultation</td>
+            <td style="color:red; font-weight:bold;">
+                Rejected
+            </td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+<br />
+
 <form asp-controller="Home" asp-action="Student">
     <button type="submit" class="btn btn-primary mt-3">
         Back to Dashboard

@@ -15,8 +15,31 @@ namespace SmartCampusMVC.Controllers
             return View("~/Views/Student/ReportIssue.cshtml");
         }
 
+        // GET METHOD
         public IActionResult BookConsultation()
         {
+            return View("~/Views/Student/BookConsultation.cshtml");
+        }
+
+        // POST METHOD (NEW)
+        [HttpPost]
+        public IActionResult BookConsultation(
+            string Lecturer,
+            DateTime? ConsultationDate,
+            TimeSpan? ConsultationTime,
+            string Reason)
+        {
+            if (string.IsNullOrEmpty(Lecturer) ||
+                ConsultationDate == null ||
+                ConsultationTime == null ||
+                string.IsNullOrEmpty(Reason))
+            {
+                ViewBag.ErrorMessage = "Please complete all required fields.";
+                return View("~/Views/Student/BookConsultation.cshtml");
+            }
+
+            ViewBag.SuccessMessage = "Consultation booked successfully.";
+
             return View("~/Views/Student/BookConsultation.cshtml");
         }
 
