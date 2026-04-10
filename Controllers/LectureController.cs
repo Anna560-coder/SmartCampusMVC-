@@ -22,7 +22,7 @@ namespace SmartCampusMVC.Controllers
         {
             return View();
         }
-        M
+        
         // ✅ GET: Load Lecturer Profile
         public async Task<IActionResult> ManageProfile()
         {
