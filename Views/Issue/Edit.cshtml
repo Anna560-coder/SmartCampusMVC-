@@ -1,0 +1,26 @@
+﻿@model SmartCampusMVC.Models.Issues
+
+<h2>Edit Issue</h2>
+
+<form asp-action="Edit">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Issue Type</label>
+        <select asp-for="IssueType" class="form-control">
+            <option>WiFi Problem</option>
+            <option>Login Issue</option>
+            <option>System Crash</option>
+            <option>Slow Performance</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Update</button>
+</form>
