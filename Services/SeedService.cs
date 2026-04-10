@@ -41,6 +41,8 @@ namespace SmartCampusMVC.Services
                         NormalizedEmail = technicianEmail.ToUpper(),
                         EmailConfirmed = true,
                         SecurityStamp = Guid.NewGuid().ToString(),
+                        Faculty = "IT",
+                        StudentNumber = 0
                     };
 
                     var result = await userManager.CreateAsync(technicianUser, "Tech@1234");
