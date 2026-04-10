@@ -1,0 +1,33 @@
+﻿@model SmartCampusMVC.ViewModels.UserProfileViewModel
+
+<h2>Edit Profile</h2>
+
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+
+    <input asp-for="FullName" placeholder="Full Name" />
+    <br /><br />
+
+    <input asp-for="StudentNumber" placeholder="Student Number" />
+    <br />
+
+    <input asp-for="Faculty" readonly class="form-control" />
+    <br />
+
+    <input asp-for="Email" readonly class="form-control" />
+    <br />
+
+    <!-- CURRENT IMAGE -->
+    @if (Model.ExistingImagePath != null)
+    {
+        <img src="@Model.ExistingImagePath" width="120" style="border-radius:50%;" />
+        <br />
+
+        <br />
+    }
+
+    <!-- UPLOAD NEW IMAGE -->
+    <input type="file" asp-for="ProfileImage" />
+    <br /><br />
+
+    <button type="submit">Save Changes</button>
+</form>
