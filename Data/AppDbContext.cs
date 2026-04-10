@@ -14,5 +14,7 @@ namespace SmartCampusMVC.Data
         protected AppDbContext()
         {
         }
+
+        public DbSet<Issues> Issues { get; set; }
     }
 }
