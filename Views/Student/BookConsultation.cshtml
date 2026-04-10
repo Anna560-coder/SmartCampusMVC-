@@ -1,10 +1,71 @@
-﻿<h2>Request Campus Service</h2>
-<p>This module is under development.</p>
+﻿@{
+    ViewData["Title"] = "Book Academic Consultation";
+}
 
-<!-- BACK TO DASHBOARD BUTTON -->
-<form asp-controller="Home" asp-action="Student" >
+<h2>Book Academic Consultation</h2>
+
+<p>Please fill in the form below to book a consultation with a lecturer.</p>
+
+<hr />
+
+<!-- SUCCESS MESSAGE -->
+@if (ViewBag.SuccessMessage != null)
+{
+    <p style="color:green;">
+        @ViewBag.SuccessMessage
+    </p>
+}
+
+<!-- ERROR MESSAGE -->
+@if (ViewBag.ErrorMessage != null)
+{
+    <p style="color:red;">
+        @ViewBag.ErrorMessage
+    </p>
+}
+
+<form asp-controller="Student" asp-action="BookConsultation" method="post">
+
+    <label>Select Lecturer</label>
+    <br />
+    <select name="Lecturer" required>
+        <option value="">Select Lecturer</option>
+        <option>Dr. Paulina Phoobane</option>
+        <option>Prof. Khumulani Sibande</option>
+        <option>Dr. Ntima Mabanza</option>
+        <option>Gadner Mwansa</option>
+    </select>
+
+    <br /><br />
+
+    <label>Consultation Date</label>
+    <br />
+    <input type="date" name="ConsultationDate" required />
+
+    <br /><br />
+
+    <label>Consultation Time</label>
+    <br />
+    <input type="time" name="ConsultationTime" required />
+
+    <br /><br />
+
+    <label>Reason for Consultation</label>
+    <br />
+    <textarea name="Reason" rows="4" cols="50" required></textarea>
+
+    <br /><br />
+
+    <button type="submit">
+        Book Consultation
+    </button>
+
+</form>
+
+<br />
+
+<form asp-controller="Home" asp-action="Student">
     <button type="submit" class="btn btn-primary mt-3">
         Back to Dashboard
     </button>
 </form>
-
