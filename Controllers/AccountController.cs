@@ -69,7 +69,8 @@ namespace SmartCampusMVC.Controllers
                 UserName = model.Email,
                 NormalizedUserName = model.Email.ToUpper(),
                 Email = model.Email,
-                NormalizedEmail = model.Email.ToUpper()
+                NormalizedEmail = model.Email.ToUpper(),
+                ProfileImagePath = "/images/default.png"
 
             };
 

@@ -18,8 +18,9 @@
 
   <ItemGroup>
     <Folder Include="Views\Lecture\" />
+    <Folder Include="Views\NewFolder\" />
     <Folder Include="Views\Technician\" />
-    <Folder Include="wwwroot\Images\" />
+    <Folder Include="wwwroot\Images\profiles\" />
   </ItemGroup>
 
 </Project>

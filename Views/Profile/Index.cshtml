@@ -1,0 +1,28 @@
+﻿@model SmartCampusMVC.ViewModels.UserProfileViewModel
+
+<h2>My Profile</h2>
+
+<br />
+
+<!-- PROFILE IMAGE -->
+@if (Model.ExistingImagePath != null)
+{
+    <img src="@Model.ExistingImagePath" width="120" height="120" style="border-radius:50%;" />
+}
+else
+{
+    <img src="/images/default.png" width="120" height="120" style="border-radius:50%;" />
+}
+
+<br />
+<br />
+
+<p><strong>Full Name:</strong> @Model.FullName</p>
+<p><strong>Email:</strong> @Model.Email</p>
+<p><strong>Student Number:</strong> @Model.StudentNumber</p>
+<p><strong>Faculty:</strong> @Model.Faculty</p>
+
+<br />
+
+<a asp-action="Edit">Edit Profile</a> |
+<a asp-action="Delete">Delete Account</a>

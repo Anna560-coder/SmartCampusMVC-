@@ -8,7 +8,9 @@ namespace SmartCampusMVC.Models
 
         public int StudentNumber { get; set; }
 
-        public string Faculty {  get; set; }
+        public string Faculty { get; set; }
+        
+        public string? ProfileImagePath { get; set; }
 
 
     }
