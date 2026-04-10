@@ -6,10 +6,12 @@ namespace SmartCampusMVC.Models
     {
         public string FullName { get; set; }
 
+        // Used as BOTH Student Number & Staff Number
+
+        public string Email { get; set; }
+
         public int StudentNumber { get; set; }
 
-        public string Faculty {  get; set; }
-
-
+        public string Faculty { get; set; }
     }
 }

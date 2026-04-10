@@ -1,13 +1,76 @@
-﻿<h2>Manage Lecturer Profile</h2>
+﻿@model SmartCampusMVC.Models.Users
 
-<p>
-    Here the lecturer can update their personal information.
-</p>
+@{
+    ViewData["Title"] = "Manage Lecturer Profile";
+}
 
-<br />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
 
-<form asp-controller="Home" asp-action="Lecture">
-    <button type="submit" class="btn btn-primary mt-3">
-        Back to Dashboard
-    </button>
-</form>
+            <div class="card shadow rounded-3">
+                <div class="card-header bg-dark text-white text-center">
+                    <h4>Lecturer Profile</h4>
+                </div>
+
+                <div class="card-body">
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success text-center">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    <form asp-action="UpdateLecturerProfile" method="post">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Full Name -->
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input asp-for="FullName" class="form-control" />
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" readonly />
+                        </div>
+
+                        <!-- Staff Number -->
+                        <div class="mb-3">
+                            <label class="form-label">Staff Number</label>
+                            <input asp-for="StudentNumber" class="form-control" readonly />
+                        </div>
+
+                        <!-- Faculty -->
+                        <div class="mb-3">
+                            <label class="form-label">Faculty</label>
+                            <input asp-for="Faculty" class="form-control" />
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-success">
+                                Update Profile
+                            </button>
+                        </div>
+                    </form>
+
+                    <hr />
+
+                    <div class="text-center">
+                        <a asp-controller="Home" asp-action="Lecture" class="btn btn-outline-secondary">
+                            Back to Dashboard
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="card-footer text-center text-muted">
+                    Smart Campus System
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
