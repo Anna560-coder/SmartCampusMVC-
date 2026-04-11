@@ -17,17 +17,17 @@ namespace SmartCampusMVC.Services
 
             try
             {
-                //Ensure the database is ready
+                
                 logger.LogInformation("Ensuring the database is created.");
                 await context.Database.EnsureCreatedAsync();
 
-                //Add roles
+               
                 logger.LogInformation("Seeding roles.");
                 await AddRoleAsync(roleManager, "Student");
                 await AddRoleAsync(roleManager, "Lecture");
                 await AddRoleAsync(roleManager, "Technician");
 
-                //Add Technician user
+                
                 logger.LogInformation("Seeding technician user.");
                 var technicianEmail = "technician@gmail.com";
                 if (await userManager.FindByEmailAsync(technicianEmail) == null) 

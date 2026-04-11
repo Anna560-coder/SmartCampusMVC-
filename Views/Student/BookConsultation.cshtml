@@ -8,10 +8,7 @@
 
 <hr />
 
-<!-- SUCCESS MESSAGE -->
 
-
-<!-- ERROR MESSAGE -->
 @if (TempData["ErrorMessage"] != null)
 {
     <div class="alert alert-danger">
@@ -38,7 +35,7 @@
     <div class="card shadow p-4">
         <h4 class="mb-3">Book Consultation</h4>
 
-        <!-- SUCCESS -->
+      
         @if (ViewBag.SuccessMessage != null)
         {
             <div class="alert alert-success">
@@ -46,7 +43,7 @@
             </div>
         }
 
-        <!-- ERROR -->
+    
         @if (ViewBag.ErrorMessage != null)
         {
             <div class="alert alert-danger">

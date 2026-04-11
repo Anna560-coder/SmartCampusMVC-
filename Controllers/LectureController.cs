@@ -23,7 +23,7 @@ namespace SmartCampusMVC.Controllers
             return View();
         }
         
-        // ✅ GET: Load Lecturer Profile
+        
         public async Task<IActionResult> ManageProfile()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -31,7 +31,7 @@ namespace SmartCampusMVC.Controllers
             return View(user);
         }
 
-        // ✅ POST: Update Lecturer Profile
+        
         [HttpPost]
         public async Task<IActionResult> ManageProfile(Users model)
         {

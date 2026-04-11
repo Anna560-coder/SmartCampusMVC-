@@ -6,7 +6,7 @@ namespace SmartCampusMVC.Models
     {
         public int Id { get; set; }
 
-        public string StudentId { get; set; } // link to user
+        public string StudentId { get; set; } 
 
         public string Lecturer { get; set; }
 
@@ -16,6 +16,6 @@ namespace SmartCampusMVC.Models
 
         public string Reason { get; set; }
 
-        public string Status { get; set; } = "Pending"; // default
+        public string Status { get; set; } = "Pending"; 
     }
 }
