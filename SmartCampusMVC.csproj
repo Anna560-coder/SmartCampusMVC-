@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Lecture\" />
     <Folder Include="Views\Technician\" />
     <Folder Include="wwwroot\Images\profiles\" />
   </ItemGroup>

@@ -1,13 +1,48 @@
-﻿<h2>View Student Consultations</h2>
+﻿@model List<SmartCampusMVC.Models.Consultation>
 
-<p>
-    Here the lecturer will see all booked student consultations.
-</p>
+<h2>Student Consultations</h2>
 
-<br />
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Lecturer</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
 
-<form asp-controller="Home" asp-action="Lecture">
-    <button type="submit" class="btn btn-primary mt-3">
-        Back to Dashboard
-    </button>
-</form>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StudentId</td>
+                <td>@item.Lecturer</td>
+                <td>@item.ConsultationDate.ToShortDateString()</td>
+                <td>@item.ConsultationTime</td>
+                <td>@item.Reason</td>
+                <td>@item.Status</td>
+
+                <td>
+                    @if (item.Status == "Pending")
+                    {
+                        <a asp-action="ApproveConsultation" asp-route-id="@item.Id" class="btn btn-success btn-sm">
+                            Approve
+                        </a>
+
+                        <a asp-action="RejectConsultation" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                            Reject
+                        </a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">Locked</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
