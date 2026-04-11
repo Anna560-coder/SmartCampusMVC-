@@ -1,0 +1,33 @@
+﻿@model SmartCampusMVC.Models.Consultations
+
+<h2>Edit Consultation</h2>
+
+<form asp-action="EditConsultation" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <label>Lecturer</label>
+    <input asp-for="Lecturer" class="form-control" />
+
+    <br />
+
+    <label>Date</label>
+    <input asp-for="ConsultationDate" type="date" class="form-control" />
+
+    <br />
+
+    <label>Time</label>
+    <input asp-for="ConsultationTime" type="time" class="form-control" />
+
+    <br />
+
+    <label>Reason</label>
+    <textarea asp-for="Reason" class="form-control"></textarea>
+
+    <br />
+
+    <button type="submit" class="btn btn-success">
+        Save Changes
+    </button>
+
+</form>
