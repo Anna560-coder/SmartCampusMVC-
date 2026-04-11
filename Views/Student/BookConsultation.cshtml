@@ -9,57 +9,81 @@
 <hr />
 
 <!-- SUCCESS MESSAGE -->
-@if (ViewBag.SuccessMessage != null)
-{
-    <p style="color:green;">
-        @ViewBag.SuccessMessage
-    </p>
-}
+
 
 <!-- ERROR MESSAGE -->
-@if (ViewBag.ErrorMessage != null)
+@if (TempData["ErrorMessage"] != null)
 {
-    <p style="color:red;">
-        @ViewBag.ErrorMessage
-    </p>
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" id="successMessage">
+        @TempData["SuccessMessage"]
+    </div>
+
+    <script>
+        setTimeout(function () {
+            window.location.href = '/Student/ViewConsultationHistory';
+        }, 2000); // 2 seconds
+    </script>
 }
 
 <form asp-controller="Student" asp-action="BookConsultation" method="post">
+    @Html.AntiForgeryToken()
 
-    <label>Select Lecturer</label>
-    <br />
-    <select name="Lecturer" required>
-        <option value="">Select Lecturer</option>
-        <option>Dr. Paulina Phoobane</option>
-        <option>Prof. Khumulani Sibande</option>
-        <option>Dr. Ntima Mabanza</option>
-        <option>Gadner Mwansa</option>
-    </select>
+    <div class="card shadow p-4">
+        <h4 class="mb-3">Book Consultation</h4>
 
-    <br /><br />
+        <!-- SUCCESS -->
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="alert alert-success">
+                @ViewBag.SuccessMessage
+            </div>
+        }
 
-    <label>Consultation Date</label>
-    <br />
-    <input type="date" name="ConsultationDate" required />
+        <!-- ERROR -->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
 
-    <br /><br />
+        <div class="mb-3">
+            <label class="form-label">Lecturer</label>
+            <select name="Lecturer" class="form-control" required>
+                <option value="">Select Lecturer</option>
+                <option>Dr. Paulina Phoobane</option>
+                <option>Prof. Khumulani Sibande</option>
+                <option>Dr. Ntima Mabanza</option>
+                <option>Gadner Mwansa</option>
+            </select>
+        </div>
 
-    <label>Consultation Time</label>
-    <br />
-    <input type="time" name="ConsultationTime" required />
+        <div class="mb-3">
+            <label class="form-label">Consultation Date</label>
+            <input type="date" name="ConsultationDate" class="form-control" required />
+        </div>
 
-    <br /><br />
+        <div class="mb-3">
+            <label class="form-label">Consultation Time</label>
+            <input type="time" name="ConsultationTime" class="form-control" required />
+        </div>
 
-    <label>Reason for Consultation</label>
-    <br />
-    <textarea name="Reason" rows="4" cols="50" required></textarea>
+        <div class="mb-3">
+            <label class="form-label">Reason</label>
+            <textarea name="Reason" class="form-control" rows="4" required></textarea>
+        </div>
 
-    <br /><br />
-
-    <button type="submit">
-        Book Consultation
-    </button>
-
+        <button type="submit" class="btn btn-primary w-100">
+            Book Consultation
+        </button>
+    </div>
 </form>
 
 <br />

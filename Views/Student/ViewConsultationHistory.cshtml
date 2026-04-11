@@ -1,68 +1,84 @@
-﻿@{
+﻿@model List<SmartCampusMVC.Models.Consultation>
+
+@{
     ViewData["Title"] = "Consultation History";
 }
 
-<h2>My Booked Consultations</h2>
+<h2 class="mb-4">My Booked Consultations</h2>
 
-<p>Below is a list of all your booked academic consultations.</p>
+<div class="card shadow p-3">
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Lecturer</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
 
-<hr />
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Lecturer</td>
+                        <td>@item.ConsultationDate.ToShortDateString()</td>
+                        <td>@item.ConsultationTime</td>
+                        <td>@item.Reason</td>
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                            else if (item.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Rejected</span>
+                            }
+                        </td>
 
-<table border="1">
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <a asp-action="EditConsultation" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                                    Edit
+                                </a>
 
-    <thead>
-        <tr>
-            <th>Lecturer</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Reason</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-
-    <tbody>
-
-        <!-- PENDING -->
-        <tr>
-            <td>Dr. Paulina Phoobane</td>
-            <td>2026-04-15</td>
-            <td>10:00</td>
-            <td>Help with assignment 2</td>
-            <td style="color:orange; font-weight:bold;">
-                Pending
-            </td>
-        </tr>
-
-        <!-- APPROVED -->
-        <tr>
-            <td>Prof. Khumulani Sibande</td>
-            <td>2026-04-18</td>
-            <td>14:30</td>
-            <td>Exam preparation guidance</td>
-            <td style="color:green; font-weight:bold;">
-                Approved
-            </td>
-        </tr>
-
-        <!-- REJECTED -->
-        <tr>
-            <td>Dr. Ntima Mabanza</td>
-            <td>2026-04-20</td>
-            <td>09:00</td>
-            <td>Project consultation</td>
-            <td style="color:red; font-weight:bold;">
-                Rejected
-            </td>
-        </tr>
-
-    </tbody>
-
-</table>
+                                <a asp-action="DeleteConsultation" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                                    Delete
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Locked</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        No consultations booked yet.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <br />
 
 <form asp-controller="Home" asp-action="Student">
-    <button type="submit" class="btn btn-primary mt-3">
+    <button type="submit" class="btn btn-primary">
         Back to Dashboard
     </button>
 </form>
