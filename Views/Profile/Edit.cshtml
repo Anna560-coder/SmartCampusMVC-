@@ -16,7 +16,7 @@
     <input asp-for="Email" readonly class="form-control" />
     <br />
 
-    <!-- CURRENT IMAGE -->
+   
     @if (Model.ExistingImagePath != null)
     {
         <img src="@Model.ExistingImagePath" width="120" style="border-radius:50%;" />
@@ -25,7 +25,6 @@
         <br />
     }
 
-    <!-- UPLOAD NEW IMAGE -->
     <input type="file" asp-for="ProfileImage" />
     <br /><br />
 

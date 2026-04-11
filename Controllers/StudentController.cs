@@ -26,23 +26,23 @@ namespace SmartCampusMVC.Controllers
             return View("~/Views/Student/ReportIssue.cshtml");
         }
 
-        // ✅ GET: Book Consultation Page
+        
         public IActionResult BookConsultation()
         {
-            ViewBag.ErrorMessage = null; // ✅ CLEAR ERROR
+            ViewBag.ErrorMessage = null; 
             ViewBag.SuccessMessage = null;
 
             return View("~/Views/Student/BookConsultation.cshtml");
         }
 
-        // ✅ POST: Save Consultation to DB
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> BookConsultation(string Lecturer, DateTime ConsultationDate, TimeSpan ConsultationTime, string Reason)
         {
             if (ConsultationTime == default)
             {
-                //TempData["ErrorMessage"] = "Time is required!";
+             
                 return RedirectToAction("BookConsultation");
             }
 
@@ -63,11 +63,11 @@ namespace SmartCampusMVC.Controllers
 
             TempData["SuccessMessage"] = "Consultation booked successfully!";
 
-            // 👇 IMPORTANT: redirect to SAME page first
+            
             return RedirectToAction("BookConsultation");
         }
 
-        // ✅ VIEW HISTORY
+        
         public async Task<IActionResult> ViewConsultationHistory()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);

@@ -31,7 +31,7 @@ namespace SmartCampusMVC.Controllers
 
             string? filePath = null;
 
-            // ✅ HANDLE FILE UPLOAD
+           
             if (model.File != null)
             {
                 string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
@@ -58,7 +58,7 @@ namespace SmartCampusMVC.Controllers
                 IssueType = model.IssueType,
                 CustomIssue = model.IssueType == "Other" ? model.CustomIssue : null,
                 Description = model.Description,
-                FilePath = filePath // ✅ SAVE PATH
+                FilePath = filePath 
             };
 
             _context.Issues.Add(issue);
@@ -98,7 +98,7 @@ namespace SmartCampusMVC.Controllers
             return RedirectToAction("Index");
         }
 
-        // GET
+      
         public async Task<IActionResult> Edit(int id)
         {
             var user = await _userManager.GetUserAsync(User);
@@ -113,7 +113,7 @@ namespace SmartCampusMVC.Controllers
             return View(issue);
         }
 
-        // POST
+       
         [HttpPost]
         public async Task<IActionResult> Edit(Issues model)
         {
@@ -124,7 +124,7 @@ namespace SmartCampusMVC.Controllers
                 return NotFound();
             }
 
-            // ✅ Only update editable fields
+            
             existingIssue.IssueType = model.IssueType;
             existingIssue.CustomIssue = model.CustomIssue;
             existingIssue.Description = model.Description;

@@ -14,6 +14,17 @@ namespace SmartCampusMVC.Controllers
             _context = context;
         }
 
+        public IActionResult ViewConsultations()
+        {
+            return View();
+        }
+
+        public IActionResult ApproveRequests()
+        {
+            return View();
+        }
+        
+        
         // ✅ LOAD PROFILE PAGE
         [HttpGet]
         public async Task<IActionResult> ManageProfile()
@@ -30,7 +41,6 @@ namespace SmartCampusMVC.Controllers
             return View(user);
         }
 
-        // ✅ UPDATE PROFILE
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateLecturerProfile(Users model, IFormFile ProfileImage)

@@ -16,7 +16,7 @@ namespace SmartCampusMVC.Controllers
             _signInManager = signInManager;
         }
 
-        // ✅ VIEW PROFILE
+       
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -54,7 +54,7 @@ namespace SmartCampusMVC.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
 
-            // ✅ IMAGE UPLOAD
+            
             if (model.ProfileImage != null)
             {
                 string folder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/profiles");
@@ -74,7 +74,7 @@ namespace SmartCampusMVC.Controllers
                 user.ProfileImagePath = "/images/profiles/" + fileName;
             }
 
-            // ✅ UPDATE DATA
+            
             user.FullName = model.FullName;
             user.StudentNumber = model.StudentNumber;
             user.Faculty = model.Faculty;
