@@ -1,12 +1,61 @@
-﻿<h2>View Student Consultations</h2>
+﻿@model IEnumerable<SmartCampusMVC.Models.ConsultationRequest>
 
-<p>
-    Here the lecturer will see all booked student consultations.
-</p>
+@{
+    ViewData["Title"] = "View Consultations";
+}
 
-<br />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
 
-<form asp-controller="Home" asp-action="Lecture">
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Student</th>
+            <th>Student No.</th>
+            <th>Faculty</th>
+             <th>Description</th>
+            <th>Date & Time</th>
+            <th>Status</th>
+            <th>Submitted</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.StudentName</td>
+                <td>@item.StudentNumber</td>
+                <td>@item.Faculty</td>
+                <td>@item.Description</td>
+                <td>@item.RequestedDate.ToString("dd MMM yyyy") at @item.RequestedTime</td>
+                <td>
+                    <span title="@item.Description" style="cursor:help;">
+                        @(item.Description?.Length > 40 ? item.Description.Substring(0, 40) + "..." : item.Description)
+                    </span>
+                </td>
+                <td>
+                    @if (item.Status == "Pending")
+                    {
+                        <span class="badge bg-warning text-dark">Pending</span>
+                    }
+                    else if (item.Status == "Approved")
+                    {
+                        <span class="badge bg-success">Approved</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Rejected</span>
+                    }
+                </td>
+                <td>@item.CreatedAt.ToString("dd MMM yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+ <form asp-controller="Home" asp-action="Lecture">
     <button type="submit" class="btn btn-primary mt-3">
         Back to Dashboard
     </button>

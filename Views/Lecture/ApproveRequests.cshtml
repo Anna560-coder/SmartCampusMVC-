@@ -1,10 +1,72 @@
-﻿<h2>Approve Consultation Requests</h2>
+﻿@model IEnumerable<SmartCampusMVC.Models.ConsultationRequest>
 
-<p>
-    Here the lecturer will approve or reject consultation requests.
-</p>
+@{
+    ViewData["Title"] = "Approve Requests";
+}
 
-<br />
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Danger"] != null)
+{
+    <div class="alert alert-danger">@TempData["Danger"]</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info">No pending consultation requests at the moment.</div>
+}
+else
+{
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3 border-warning">
+            <div class="card-header d-flex justify-content-between">
+                <strong>@item.StudentName</strong>
+                <span class="text-muted">@item.StudentNumber</span>
+            </div>
+            <div class="card-body">
+                <p><strong>Faculty:</strong> @item.Faculty</p>
+                <p><strong>Requested Slot:</strong> @item.RequestedDate.ToString("dd MMM yyyy") at @item.RequestedTime</p>
+                <p><strong>Description:</strong> @item.Description</p>
+
+                <div class="row mt-3">
+                    <!-- Approve Form -->
+                    <div class="col-md-6">
+                        <form asp-action="Approve" asp-controller="Lecture" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <div class="mb-2">
+                                <label class="form-label">Note to Student (optional)</label>
+                                <input type="text" name="lecturerNote" class="form-control"
+                                       placeholder="e.g. See you in Room 204" />
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">
+                                ✔ Approve
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Reject Form -->
+                    <div class="col-md-6">
+                        <form asp-action="Reject" asp-controller="Lecture" method="post">
+                            <input type="hidden" name="id" value="@item.Id" />
+                            <div class="mb-2">
+                                <label class="form-label">Reason for Rejection (optional)</label>
+                                <input type="text" name="rejectionReason" class="form-control"
+                                       placeholder="e.g. Slot unavailable, please reschedule" />
+                            </div>
+                            <button type="submit" class="btn btn-danger w-100"
+                                    onclick="return confirm('Reject this request?')">
+                                ✘ Reject
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
 
 <form asp-controller="Home" asp-action="Lecture">
     <button type="submit" class="btn btn-primary mt-3">

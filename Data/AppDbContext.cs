@@ -16,5 +16,6 @@ namespace SmartCampusMVC.Data
         }
 
         public DbSet<Issues> Issues { get; set; }
+        public DbSet<ConsultationRequest> ConsultationRequests { get; set; } //
     }
 }
