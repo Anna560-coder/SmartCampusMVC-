@@ -17,5 +17,8 @@ namespace SmartCampusMVC.Models
         public string Reason { get; set; }
 
         public string Status { get; set; } = "Pending"; // default
+
+        // ✅ NEW FIELD
+        public string? RejectionReason { get; set; }
     }
 }

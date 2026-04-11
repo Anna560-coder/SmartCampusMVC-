@@ -65,5 +65,58 @@ namespace SmartCampusMVC.Controllers
             TempData["Success"] = "Profile updated successfully!";
             return RedirectToAction("ManageProfile");
         }
+
+        public async Task<IActionResult> ViewConsultations()
+        {
+            var consultations = await _context.Consultations
+                .OrderByDescending(c => c.ConsultationDate)
+                .ToListAsync();
+
+            return View(consultations);
+        }
+
+        //Approve
+        public async Task<IActionResult> ApproveConsultation(int id)
+        {
+            var consultation = await _context.Consultations.FindAsync(id);
+
+            if (consultation == null)
+                return NotFound();
+
+            consultation.Status = "Approved";
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ViewConsultations");
+        }
+
+        //Reject
+        public async Task<IActionResult> RejectConsultation(int id)
+        {
+            var consultation = await _context.Consultations.FindAsync(id);
+
+            if (consultation == null)
+                return NotFound();
+
+            return View(consultation);
+        }
+
+        //Post Reject with Reason
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RejectConsultation(int id, string rejectionReason)
+        {
+            var consultation = await _context.Consultations.FindAsync(id);
+
+            if (consultation == null)
+                return NotFound();
+
+            consultation.Status = "Rejected";
+            consultation.RejectionReason = rejectionReason;
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("ViewConsultations");
+        }
     }
 }

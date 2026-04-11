@@ -47,17 +47,22 @@
                         <td>
                             @if (item.Status == "Pending")
                             {
-                                <a asp-action="EditConsultation" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
-                                    Edit
-                                </a>
-
-                                <a asp-action="DeleteConsultation" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
-                                    Delete
-                                </a>
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                            else if (item.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
                             }
                             else
                             {
-                                <span class="text-muted">Locked</span>
+                                <span class="badge bg-danger">Rejected</span>
+
+                                @if (!string.IsNullOrEmpty(item.RejectionReason))
+                                {
+                                    <div class="text-muted small mt-1">
+                                        Reason: @item.RejectionReason
+                                    </div>
+                                }
                             }
                         </td>
                     </tr>

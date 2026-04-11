@@ -1,0 +1,16 @@
+﻿@model SmartCampusMVC.Models.Consultation
+
+<h2>Reject Consultation</h2>
+
+<form asp-action="RejectConsultation" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+
+    <div class="mb-3">
+        <label>Reason for Rejection</label>
+        <textarea name="rejectionReason" class="form-control" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-danger">
+        Submit Rejection
+    </button>
+</form>
