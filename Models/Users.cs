@@ -8,7 +8,7 @@ namespace SmartCampusMVC.Models
 
         // Used as BOTH Student Number & Staff Number
 
-       // public string Email { get; set; }
+
         
         public string? ProfileImagePath { get; set; }
 
