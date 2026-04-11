@@ -1,23 +1,26 @@
-﻿namespace SmartCampusMVC.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SmartCampusMVC.Models
 {
     public class Issues
     {
         public int Id { get; set; }
 
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
 
-        public string IssueType { get; set; }
+        [Required]
+        public string IssueType { get; set; } = string.Empty;
 
         public string? CustomIssue { get; set; }
 
-        public string? Description { get; set; }
+        [Required]
+        public string Description { get; set; } = string.Empty;
 
         public string? FilePath { get; set; }
 
+        [Required]
         public string Status { get; set; } = "Pending";
 
-        public DateTime DateCreated { get; set; } = DateTime.Now;
-
-        public string? AssignedTo { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }

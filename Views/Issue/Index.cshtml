@@ -61,6 +61,10 @@
                 </td>
                 <td>@item.DateCreated</td>
                 <td>
+                    <a asp-action="View" asp-route-id="@item.Id"
+                       class="text-info me-2" title="View">
+                        <i class="fa fa-eye"></i>
+                    </a>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="text-primary me-2" title="Edit">
                         <i class="fa fa-edit"></i>
                     </a>

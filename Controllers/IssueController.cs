@@ -69,15 +69,27 @@ namespace SmartCampusMVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var issues = _context.Issues.ToList();
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var issues = _context.Issues
+                .Where(i => i.UserId == user.Id)
+                .ToList();
+
             return View(issues);
         }
 
         public async Task<IActionResult> Delete(int id)
         {
+            var user = await _userManager.GetUserAsync(User);
+
             var issue = await _context.Issues.FindAsync(id);
 
-            if (issue != null)
+            if (issue != null && issue.UserId == user.Id)
             {
                 _context.Issues.Remove(issue);
                 await _context.SaveChangesAsync();
@@ -89,7 +101,15 @@ namespace SmartCampusMVC.Controllers
       
         public async Task<IActionResult> Edit(int id)
         {
+            var user = await _userManager.GetUserAsync(User);
+
             var issue = await _context.Issues.FindAsync(id);
+
+            if (issue == null || issue.UserId != user.Id)
+            {
+                return NotFound();
+            }
+
             return View(issue);
         }
 
@@ -112,6 +132,19 @@ namespace SmartCampusMVC.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Index");
+        }
+
+        // VIEW DETAILS
+        public async Task<IActionResult> View(int id)
+        {
+            var issue = await _context.Issues.FindAsync(id);
+
+            if (issue == null)
+            {
+                return NotFound();
+            }
+
+            return View(issue);
         }
     }
 }

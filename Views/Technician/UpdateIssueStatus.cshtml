@@ -1,13 +1,61 @@
-﻿<h2>Update Issue Status</h2>
+﻿@model SmartCampusMVC.Models.Issues
 
-<p>
-    Here the technician can update the status of reported issues.
-</p>
+@{
+    ViewData["Title"] = "Update Issue Status";
+}
+
+<h2>Update Issue Status</h2>
+
+<hr />
+
+<form asp-action="UpdateIssueStatus" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label class="form-label">Issue Type</label>
+        <input asp-for="IssueType" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Custom Issue</label>
+        <input asp-for="CustomIssue" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea asp-for="Description" class="form-control" readonly></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">File Path</label>
+        <input asp-for="FilePath" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Date Created</label>
+        <input asp-for="DateCreated" class="form-control" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Pending">Pending</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Update Status
+    </button>
+</form>
 
 <br />
 
-<form asp-controller="Home" asp-action="Technician">
+<form asp-controller="Technician" asp-action="ViewReportedIssues">
     <button type="submit" class="btn btn-primary mt-3">
-        Back to Dashboard
+        Back to Reported Issues
     </button>
 </form>
