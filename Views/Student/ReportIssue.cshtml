@@ -1,9 +1,47 @@
-﻿<h2>Request Campus Service</h2>
-<p>This module is under development.</p>
+﻿<form asp-controller="Issue" asp-action="Create" method="post" enctype="multipart/form-data">
 
-<!-- BACK TO DASHBOARD BUTTON -->
-<form asp-controller="Home" asp-action="Student">
-    <button type="submit" class="btn btn-primary mt-3">
-        Back to Dashboard
-    </button>
+    <div class="mb-3">
+        <label>Issue Type</label>
+        <select name="IssueType" id="issueType" class="form-control">
+            <option>WiFi Problem</option>
+            <option>Login Issue</option>
+            <option>System Crash</option>
+            <option>Slow Performance</option>
+            <option>Other</option>
+        </select>
+    </div>
+
+    <div class="mb-3" id="fileDiv" style="display:none;">
+        <label>Upload Image</label>
+        <input type="file" name="File" class="form-control" />
+    </div>
+
+    <div class="mb-3" id="customDiv" style="display:none;">
+        <label>Custom Issue</label>
+        <input name="CustomIssue" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Description</label>
+        <textarea name="Description" class="form-control"></textarea>
+    </div>
+
+    <div class="mt-3">
+        <button class="btn btn-primary">Submit Issue</button>
+
+        <a asp-controller="Issue" asp-action="Index" class="btn btn-outline-secondary ms-2">
+            View My Issues
+        </a>
+    </div>
+
 </form>
+
+
+<script>
+    document.getElementById("issueType").addEventListener("change", function () {
+        const isOther = this.value === "Other";
+
+        document.getElementById("customDiv").style.display = isOther ? "block" : "none";
+        document.getElementById("fileDiv").style.display = isOther ? "block" : "none";
+    });
+</script>

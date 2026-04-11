@@ -1,33 +1,45 @@
-﻿@model SmartCampusMVC.Models.Consultations
+﻿@model SmartCampusMVC.Models.Consultation
 
 <h2>Edit Consultation</h2>
 
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
 <form asp-action="EditConsultation" method="post">
 
+    @Html.AntiForgeryToken()
+
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="StudentId" />
 
-    <label>Lecturer</label>
-    <input asp-for="Lecturer" class="form-control" />
+    <div class="mb-3">
+        <label>Lecturer</label>
+        <input asp-for="Lecturer" class="form-control" />
+    </div>
 
-    <br />
+    <div class="mb-3">
+        <label>Date</label>
+        <!-- ✅ FIXED DATE -->
+        <input asp-for="ConsultationDate" type="date" class="form-control" />
+    </div>
 
-    <label>Date</label>
-    <input asp-for="ConsultationDate" type="date" class="form-control" />
+    <div class="mb-3">
+        <label>Time</label>
+        <!-- ✅ FIXED TIME -->
+        <input type="time"
+               name="ConsultationTime"
+               class="form-control"
+               value="@Model.ConsultationTime.ToString(@"hh\:mm")" />
+    </div>
 
-    <br />
+    <div class="mb-3">
+        <label>Reason</label>
+        <textarea asp-for="Reason" class="form-control"></textarea>
+    </div>
 
-    <label>Time</label>
-    <input asp-for="ConsultationTime" type="time" class="form-control" />
-
-    <br />
-
-    <label>Reason</label>
-    <textarea asp-for="Reason" class="form-control"></textarea>
-
-    <br />
-
-    <button type="submit" class="btn btn-success">
-        Save Changes
-    </button>
-
+    <button type="submit" class="btn btn-success">Update</button>
 </form>

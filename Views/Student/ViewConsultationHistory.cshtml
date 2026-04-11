@@ -1,9 +1,84 @@
-﻿<h2>Request Campus Service</h2>
-<p>This module is under development.</p>
+﻿@model List<SmartCampusMVC.Models.Consultation>
 
-<!-- BACK TO DASHBOARD BUTTON -->
+@{
+    ViewData["Title"] = "Consultation History";
+}
+
+<h2 class="mb-4">My Booked Consultations</h2>
+
+<div class="card shadow p-3">
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Lecturer</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Reason</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Lecturer</td>
+                        <td>@item.ConsultationDate.ToShortDateString()</td>
+                        <td>@item.ConsultationTime</td>
+                        <td>@item.Reason</td>
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            }
+                            else if (item.Status == "Approved")
+                            {
+                                <span class="badge bg-success">Approved</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">Rejected</span>
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.Status == "Pending")
+                            {
+                                <a asp-action="EditConsultation" asp-route-id="@item.Id" class="btn btn-sm btn-primary">
+                                    Edit
+                                </a>
+
+                                <a asp-action="DeleteConsultation" asp-route-id="@item.Id" class="btn btn-sm btn-danger">
+                                    Delete
+                                </a>
+                            }
+                            else
+                            {
+                                <span class="text-muted">Locked</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        No consultations booked yet.
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<br />
+
 <form asp-controller="Home" asp-action="Student">
-    <button type="submit" class="btn btn-primary mt-3">
+    <button type="submit" class="btn btn-primary">
         Back to Dashboard
     </button>
 </form>

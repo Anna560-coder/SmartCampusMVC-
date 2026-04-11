@@ -1,13 +1,100 @@
-﻿<h2>Manage Lecturer Profile</h2>
+﻿@model SmartCampusMVC.Models.Users
 
-<p>
-    Here the lecturer can update their personal information.
-</p>
+@{
+    ViewData["Title"] = "Lecturer Profile";
+}
 
-<br />
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
 
-<form asp-controller="Home" asp-action="Lecture">
-    <button type="submit" class="btn btn-primary mt-3">
-        Back to Dashboard
-    </button>
-</form>
+            <div class="card border-0 shadow-lg rounded-4">
+
+                <!-- Header -->
+                <div class="card-header text-center bg-gradient text-white rounded-top-4"
+                     style="background: linear-gradient(135deg, #0d6efd, #198754);">
+                    <h4 class="mb-0">Lecturer Profile</h4>
+                </div>
+
+                <div class="card-body p-4">
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success text-center rounded-3">
+                            @TempData["Success"]
+                        </div>
+                    }
+
+                    <form asp-controller="Lecturer" asp-action="UpdateLecturerProfile" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" asp-for="Id" />
+
+                        <!-- Profile Image -->
+                        <!-- Profile Image -->
+                        <div class="text-center mb-4">
+
+                            <img src="@(string.IsNullOrEmpty(Model.ProfileImagePath)
+                                        ? Url.Content("~/images/default.png")
+                                        : Url.Content("~/images/" + Model.ProfileImagePath))"
+                                 class="rounded-circle shadow mb-3"
+                                 width="130" height="130"
+                                 style="object-fit: cover; border: 4px solid #fff;" />
+
+                            <!-- Upload Button -->
+                            <label class="btn btn-outline-primary mt-2">
+                                <i class="bi bi-upload"></i> Upload Image
+                                <input type="file" name="ProfileImage" hidden />
+                            </label>
+
+                        </div>
+
+                        <!-- Info Section -->
+                        <div class="bg-light p-3 rounded-3 mb-3">
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted small">Full Name</label>
+                                <p class="fw-semibold mb-0">@Model.FullName</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted small">Email</label>
+                                <p class="fw-semibold mb-0">@Model.Email</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label text-muted small">Staff Number</label>
+                                <input asp-for="StudentNumber" class="form-control border-0 bg-white shadow-sm" readonly />
+                            </div>
+
+                            <div>
+                                <label class="form-label text-muted small">Faculty</label>
+                                <input asp-for="Faculty" class="form-control border-0 bg-white shadow-sm" readonly />
+                            </div>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success rounded-3 fw-semibold">
+                                Update Profile
+                            </button>
+
+                            <a asp-controller="Home" asp-action="Lecture"
+                               class="btn btn-outline-secondary rounded-3">
+                                Back to Dashboard
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="card-footer text-center text-muted small">
+                    Smart Campus System
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
