@@ -1,13 +1,61 @@
-﻿<h2>View Reported Issues</h2>
+﻿@model IEnumerable<SmartCampusMVC.Models.Issues>
 
-<p>
-    Here the technician will see all issues reported by students.
-</p>
+@{
+    ViewData["Title"] = "View Reported Issues";
+}
+
+<h2>View Reported Issues</h2>
+
+<hr />
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Issue Type</th>
+            <th>Custom Issue</th>
+            <th>Description</th>
+            <th>File Path</th>
+            <th>Status</th>
+            <th>Date Created</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.IssueType</td>
+                <td>@item.CustomIssue</td>
+                <td>@item.Description</td>
+                <td>@item.FilePath</td>
+                <td>@item.Status</td>
+                <td>@item.DateCreated</td>
+                <td>
+                    <a asp-controller="Technician"
+                           asp-action="UpdateIssueStatus"
+                           asp-route-id="@item.Id"
+                           class="btn btn-warning btn-sm">
+                        Update Status
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 <br />
 
-<form asp-controller="Home" asp-action="Technician">
-    <button type="submit" class="btn btn-primary mt-3">
+<form asp-controller="Technician" asp-action="TechnicianDashboard">
+    <button type="submit" class="btn btn-primary">
         Back to Dashboard
     </button>
 </form>
