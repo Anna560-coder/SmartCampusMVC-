@@ -14,10 +14,10 @@ namespace SmartCampusMVC.Controllers
             _context = context;
         }
 
-        public IActionResult ViewConsultations()
-        {
-            return View();
-        }
+        //public IActionResult ViewConsultations()
+        //{
+        //    return View();
+        //}
 
         public IActionResult ApproveRequests()
         {
