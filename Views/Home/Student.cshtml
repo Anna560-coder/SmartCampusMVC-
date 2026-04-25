@@ -2,58 +2,85 @@
     ViewData["Title"] = "Student Page";
 }
 
+<div id="student-animation"
+     style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; opacity:0.15;">
+</div>
+
 <div class="text-center">
     <h1 class="display-4">Welcome To Student Page</h1>
 </div>
 
-
-
 <hr />
 
-<h2>Student Dashboard</h2>
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title mb-0" style="display: flex; align-items: center; gap: 0.75rem;">
+                <i class="bi bi-mortarboard" style="color: var(--accent-blue);"></i>
+                Student Dashboard
+            </h2>
+        </div>
+        <div class="card-body">
+            <p class="card-text" style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+                <i class="bi bi-person-circle" style="margin-right: 0.5rem; color: var(--accent-green);"></i>
+                Welcome to the Student Portal
+            </p>
 
-<p>Welcome to the Student Portal</p>
+            <hr style="border-color: var(--border-color); margin: 1.5rem 0;" />
 
-<hr />
+            <h3 style="color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="bi bi-grid" style="color: var(--accent-blue);"></i>
+                Available Services
+            </h3>
 
-<h3>Available Services</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <form asp-action="RequestService" asp-controller="Student" style="margin: 0;">
+                    <button type="submit" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-building"></i>
+                        Request Campus Service
+                    </button>
+                </form>
 
-<br />
+                <form asp-action="ReportIssue" asp-controller="Student" style="margin: 0;">
+                    <button type="submit" class="btn btn-warning" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        Report an Issue
+                    </button>
+                </form>
 
-<form asp-action="RequestService" asp-controller="Student">
-    <button type="submit">
-        Request Campus Service
-    </button>
-</form>
+                <form asp-action="BookConsultation" asp-controller="Student" style="margin: 0;">
+                    <button type="submit" class="btn btn-success" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-calendar-plus"></i>
+                        Book Academic Consultation
+                    </button>
+                </form>
 
-<br />
+                <form asp-action="ViewConsultationHistory" asp-controller="Student" style="margin: 0;">
+                    <button type="submit" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-clock-history"></i>
+                        View Booked Consultation History
+                    </button>
+                </form>
 
-<form asp-action="ReportIssue" asp-controller="Student">
-    <button type="submit">
-        Report an Issue
-    </button>
-</form>
+                <a asp-controller="Profile" asp-action="Index" style="text-decoration: none;">
+                    <button type="button" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-person-gear"></i>
+                        Manage Profile
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
-<br />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
-<form asp-action="BookConsultation" asp-controller="Student">
-    <button type="submit">
-        Book Academic Consultation
-    </button>
-</form>
-
-<br />
-
-<form asp-action="ViewConsultationHistory" asp-controller="Student">
-    <button type="submit">
-        View Booked Consultation History
-    </button>
-</form>
-
-<br />
-
-<a asp-controller="Profile" asp-action="Index">
-    <button type="button">
-        Manage Profile
-    </button>
-</a>
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById('student-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/Student.json'
+    });
+</script>

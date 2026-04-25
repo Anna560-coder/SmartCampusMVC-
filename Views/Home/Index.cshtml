@@ -2,7 +2,469 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    /* Hero Section */
+    .hero-section {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        position: relative;
+        overflow: hidden;
+        padding: 2rem 1rem;
+    }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+    .hero-content {
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: #60a5fa;
+        padding: 0.5rem 1rem;
+        border-radius: 9999px;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 1.5rem;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    .hero-badge-dot {
+        width: 8px;
+        height: 8px;
+        background: #10b981;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 6vw, 4rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        animation: fadeInUp 0.6s ease-out 0.1s both;
+    }
+
+    .hero-title-gradient {
+        background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-animation-wrapper {
+        position: relative;
+        animation: fadeInUp 0.6s ease-out 0.2s both;
+    }
+
+    .hero-animation-glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(40px);
+        pointer-events: none;
+    }
+
+    #lottie-animation {
+        width: 100%;
+        max-width: 500px;
+        height: 400px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-description {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+        animation: fadeInUp 0.6s ease-out 0.3s both;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        animation: fadeInUp 0.6s ease-out 0.4s both;
+    }
+
+    .btn-primary-custom {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        color: #ffffff;
+        padding: 0.875rem 2rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+    .btn-secondary-custom {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        color: #e2e8f0;
+        padding: 0.875rem 2rem;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+        .btn-secondary-custom:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+    /* Features Section */
+    .features-section {
+        background: #0f172a;
+        padding: 5rem 1rem;
+    }
+
+    .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .features-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .features-subtitle {
+        color: #3b82f6;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 0.75rem;
+    }
+
+    .features-title {
+        font-size: 2.25rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 1rem;
+    }
+
+    .features-description {
+        color: #94a3b8;
+        font-size: 1.125rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .feature-card {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 1rem;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(16, 185, 129, 0.2) 100%);
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.25rem;
+    }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: #3b82f6;
+        }
+
+    .feature-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-description {
+        color: #94a3b8;
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        padding: 4rem 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stats-grid {
+        max-width: 1000px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .stat-item {
+        padding: 1rem;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+        font-weight: 800;
+        background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        color: #94a3b8;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    /* Animations */
+    @@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @@keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+    }
+
+    /* Responsive */
+    @@media (max-width: 768px) {
+        .hero-section {
+            padding: 4rem 1rem 3rem;
+        }
+
+        #lottie-animation {
+            height: 300px;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .btn-primary-custom,
+        .btn-secondary-custom {
+            width: 100%;
+            max-width: 280px;
+            justify-content: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Campus Management System
+        </div>
+
+        <h1 class="hero-title">
+            Welcome to <span class="hero-title-gradient">Smart Campus</span>
+        </h1>
+
+        <div class="hero-animation-wrapper">
+            <div class="hero-animation-glow"></div>
+            <div id="lottie-animation"></div>
+        </div>
+
+        <p class="hero-description">
+            Manage campus issues quickly and efficiently. Report, track, and resolve
+            facility problems with our streamlined digital platform.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/Issues/Create" class="btn-primary-custom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 5v14M5 12h14" />
+                </svg>
+                Report an Issue
+            </a>
+            <a href="/Issues" class="btn-secondary-custom">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+                View All Issues
+            </a>
+        </div>
+    </div>
 </div>
+
+<!-- Stats Section -->
+<div class="stats-section">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Issues Resolved</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">24h</div>
+            <div class="stat-label">Avg Response Time</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Satisfaction Rate</div>
+        </div>
+        <div class="stat-item">
+            <div class="stat-number">5k+</div>
+            <div class="stat-label">Active Users</div>
+        </div>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="features-section">
+    <div class="features-container">
+        <div class="features-header">
+            <div class="features-subtitle">Features</div>
+            <h2 class="features-title">Everything you need to manage campus facilities</h2>
+            <p class="features-description">
+                Our platform provides all the tools necessary for efficient campus issue management.
+            </p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Quick Reporting</h3>
+                <p class="feature-description">
+                    Submit issues in seconds with our intuitive reporting system. Add photos and descriptions easily.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Real-time Tracking</h3>
+                <p class="feature-description">
+                    Monitor the status of your reported issues from submission to resolution in real-time.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                        <polyline points="22 4 12 14.01 9 11.01" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Smart Resolution</h3>
+                <p class="feature-description">
+                    Automatic assignment to the right department ensures faster and more efficient issue resolution.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById('lottie-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/schedule-demo.json'
+    });
+</script>

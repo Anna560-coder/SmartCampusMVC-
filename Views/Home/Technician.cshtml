@@ -2,49 +2,56 @@
     ViewData["Title"] = "Technician Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome To Technician Page</h1>
+<div class="container py-5">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title mb-0" style="display: flex; align-items: center; gap: 0.75rem;">
+                <i class="bi bi-tools" style="color: var(--accent-blue);"></i>
+                Technician Dashboard
+            </h2>
+        </div>
+
+        <div class="card-body">
+
+            <!-- Technician Animation -->
+            <div id="technician-animation"
+                 style="width: 260px; height: 260px; margin: 0 auto 20px auto;">
+            </div>
+
+            <p class="card-text" style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+                <i class="bi bi-person-circle" style="margin-right: 0.5rem; color: var(--accent-green);"></i>
+                Welcome, Technician
+            </p>
+
+            <hr style="border-color: var(--border-color); margin: 1.5rem 0;" />
+
+            <h3 style="color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="bi bi-clipboard-check" style="color: var(--accent-blue);"></i>
+                Issue Management
+            </h3>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <a asp-controller="Technician" asp-action="ViewReportedIssues" style="text-decoration: none;">
+                    <button class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-exclamation-circle"></i>
+                        View Reported Issues
+                    </button>
+                </a>
+            </div>
+
+        </div>
+    </div>
 </div>
 
-<h2>Technician Dashboard</h2>
+<!-- Lottie Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
 
-<p>Welcome Technician</p>
-
-<hr />
-
-<h3>Issue Management</h3>
-
-<br />
-
-<a asp-controller="Technician"
-   asp-action="ViewReportedIssues">
-
-    <button>
-        View Reported Issues
-    </button>
-
-</a>
-
-<br />
-<br />
-
-<a asp-controller="Technician"
-   asp-action="UpdateIssueStatus">
-
-    <button>
-        Update Issue Status
-    </button>
-
-</a>
-
-<br />
-<br />
-
-<a asp-controller="Technician"
-   asp-action="ManageProfile">
-
-    <button>
-        Manage Profile
-    </button>
-
-</a>
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById('technician-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/Technician.json'
+    });
+</script>

@@ -6,34 +6,68 @@
     <h1 class="display-4">Welcome To Lecture Page</h1>
 </div>
 
-<h2>Lecturer Dashboard</h2>
+<div class="container py-5">
+    <div class="card">
 
-<p>Welcome Lecturer</p>
+        <div class="card-header">
+            <h2 class="card-title mb-0" style="display: flex; align-items: center; gap: 0.75rem;">
+                <i class="bi bi-easel" style="color: var(--accent-blue);"></i>
+                Lecturer Dashboard
+            </h2>
+        </div>
 
-<hr />
+        <div class="card-body">
 
-<h3>Consultation Management</h3>
+            <div id="teacher-animation" style="width: 260px; height: 260px; margin: 0 auto 20px auto;"></div>
 
-<br />
+            <p class="card-text" style="font-size: 1.125rem; margin-bottom: 1.5rem;">
+                <i class="bi bi-person-circle" style="margin-right: 0.5rem; color: var(--accent-green);"></i>
+                Welcome, Lecturer
+            </p>
 
-<a asp-controller="Lecture"
-   asp-action="ViewConsultations">
+            <hr style="border-color: var(--border-color); margin: 1.5rem 0;" />
 
-    <button>
-        View Student Consultations
-    </button>
+            <h3 style="color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="bi bi-calendar-check" style="color: var(--accent-blue);"></i>
+                Consultation Management
+            </h3>
 
-</a>
-
-<br />
-
-
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <a asp-controller="Lecture" asp-action="ViewConsultations" style="text-decoration: none;">
+                    <button class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-eye"></i>
+                        View Student Consultations
+                    </button>
+                </a>
+            </div>
+            <br />
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                <a asp-controller="Lecture" asp-action="ManageProfile" style="text-decoration: none;">
+                    <button class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                        <i class="bi bi-person-gear"></i>
+                        Manage Profile
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <a asp-controller="Lecture"
    asp-action="ManageProfile">
 
-    <button>
-        Manage Profile
-    </button>
+    
 
 </a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+<script>
+    lottie.loadAnimation({
+        container: document.getElementById('teacher-animation'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        path: '/animations/teacher.json'
+    });
+</script>
